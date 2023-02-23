@@ -1,0 +1,36 @@
+cadvisor:
+  container_name: cadvisor
+  image: docker.io/google/cadvisor:latest
+  restart: always
+  environment:
+    - TZ=Asia/Shanghai
+    - APP_ENV=local
+    - GOPROXY=https://goproxy.cn,direct
+    - STORAGE_DRIVER=influxdb2
+    - DOCKER_INFLUXDB_INIT_HOST=${INFLUXDB_HOST}
+    - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
+    - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+    - DOCKER_INFLUXDB_INIT_AUTH_TOKEN=${INFLUXDB_AUTH_TOKEN}
+  env_file:
+    - .env
+  # command : https://github.com/google/cadvisor/blob/master/docs/storage/influxdb.md
+  command:
+    - -storage_driver=influxdb2
+    - -storage_driver_host=${INFLUXDB_HOST}
+    - -storage_driver_influxdb2_org=${INFLUXDB_ORG}
+    - -storage_driver_influxdb2_bucket=${INFLUXDB_BUCKET}
+    - -storage_driver_influxdb2_auth_token=${INFLUXDB_AUTH_TOKEN}
+  hostname: cadvisor
+  expose:
+    - "8080"
+  ports:
+    - "8080:8080"
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:ro
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    - /dev/disk/:/dev/disk:ro
+  devices:
+    - /dev/kmsg
+  privileged: true
