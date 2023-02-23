@@ -236,12 +236,12 @@ func TestContainerStatsToPoints(t *testing.T) {
 	assert.Len(t, points, 34+len(stats.Cpu.Usage.PerCpu))
 
 	// CPU stats
-	assertContainsPointWithValue(t, points, serCpuUsageTotal, stats.Cpu.Usage.Total)
-	assertContainsPointWithValue(t, points, serCpuUsageSystem, stats.Cpu.Usage.System)
-	assertContainsPointWithValue(t, points, serCpuUsageUser, stats.Cpu.Usage.User)
+	assertContainsPointWithValue(t, points, serCPUUsageTotal, stats.Cpu.Usage.Total)
+	assertContainsPointWithValue(t, points, serCPUUsageSystem, stats.Cpu.Usage.System)
+	assertContainsPointWithValue(t, points, serCPUUsageUser, stats.Cpu.Usage.User)
 	assertContainsPointWithValue(t, points, serLoadAverage, stats.Cpu.LoadAverage)
 	for _, cpu_usage := range stats.Cpu.Usage.PerCpu {
-		assertContainsPointWithValue(t, points, serCpuUsagePerCpu, cpu_usage)
+		assertContainsPointWithValue(t, points, serCPUUsagePerCPU, cpu_usage)
 	}
 
 	// Memory stats
