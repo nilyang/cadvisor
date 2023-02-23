@@ -17,6 +17,8 @@ require (
 	github.com/Shopify/sarama v1.37.2
 	github.com/abbot/go-http-auth v0.4.0
 	github.com/gomodule/redigo v1.8.9
+	github.com/influxdata/influxdb-client-go/v2 v2.12.2
+	github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839
 	github.com/influxdb/influxdb v0.9.6-0.20151125225445-9eab56311373
 	github.com/mesos/mesos-go v0.0.11
 	github.com/onsi/ginkgo v1.16.5 // indirect

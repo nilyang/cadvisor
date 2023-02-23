@@ -24,6 +24,7 @@ import (
 	_ "github.com/google/cadvisor/cmd/internal/storage/bigquery"
 	_ "github.com/google/cadvisor/cmd/internal/storage/elasticsearch"
 	_ "github.com/google/cadvisor/cmd/internal/storage/influxdb"
+	_ "github.com/google/cadvisor/cmd/internal/storage/influxdb2"
 	_ "github.com/google/cadvisor/cmd/internal/storage/kafka"
 	_ "github.com/google/cadvisor/cmd/internal/storage/redis"
 	_ "github.com/google/cadvisor/cmd/internal/storage/statsd"
@@ -40,7 +41,7 @@ var (
 
 // NewMemoryStorage creates a memory storage with an optional backend storage option.
 func NewMemoryStorage() (*memory.InMemoryCache, error) {
-	backendStorages := []storage.StorageDriver{}
+	var backendStorages []storage.StorageDriver
 	for _, driver := range strings.Split(*storageDriver, ",") {
 		if driver == "" {
 			continue
